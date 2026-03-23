@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { createServer } from "node:http";
-import { WebSocket, WebSocketServer } from "ws";
+import { WebSocketServer } from "ws";
+import type { WebSocket } from "ws";
 import {
   type ClientToServerMessage,
   type ConnectionStatus,

@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "lint": "eslint \"{apps,packages,services}/**/src/**/*.ts\"",
-    "test": "npm run -w @micro-visor/signaling test",
+    "test": "npm run -w @micro-visor/signaling test && npm run -w @micro-visor/agent-runtime test",
     "test:watch": "npm run -w @micro-visor/signaling test:watch",
     "build": "npm run --workspaces build",
     "typecheck": "npm run --workspaces typecheck",
@@ -17,7 +17,8 @@
     "format:check": "prettier --check .",
     "check": "npm run lint && npm run typecheck && npm run test && npm run build && npm run format:check",
     "dev:signaling": "npm run -w @micro-visor/signaling dev",
-    "dev:agent": "npm run -w @micro-visor/agent-cli dev",
+    "dev:agent": "npm run dev:agent-runtime",
+    "dev:agent-runtime": "npm run -w @micro-visor/agent-runtime dev",
     "dev:viewer": "npm run -w @micro-visor/viewer-cli dev"
   },
   "devDependencies": {

@@ -25,6 +25,14 @@
 - Safety hardening:
   - guard against sending when socket is not open
 
+## Done in this phase
+
+- WebRTC signaling messages and forwarding path in protocol and signaling server
+- Heartbeat timeout sweep to auto-disconnect stale clients
+- Session audit log writer for signaling events
+- Automatic reconnect behavior for Agent and Viewer CLI clients
+- Signaling integration test suite with Vitest
+
 ## Verified manually
 
 - Typecheck passes across all workspaces
@@ -34,11 +42,11 @@
 ## Not done yet
 
 - Real screen capture pipeline
-- WebRTC media stream setup (SDP/ICE forwarding)
+- WebRTC media stream setup (capture + RTCPeerConnection runtime)
 - System tray icon and small status overlay UI on Agent A
 - Tiny corner chat widget UI (currently CLI only)
 - Packaging for Linux and Windows
 
 ## Next implementation target
 
-Phase B: Add WebRTC negotiation messages and establish peer media stream channel.
+Phase C: Implement Agent UI runtime (tray/status/chat mini widget) and native screen capture backend.

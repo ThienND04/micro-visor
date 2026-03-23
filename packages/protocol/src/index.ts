@@ -29,11 +29,23 @@ export interface OneLineChatPayload {
   text: string;
 }
 
+export type WebRtcSignalType = "offer" | "answer" | "ice" | "renegotiate";
+
+export interface WebRtcSignalPayload {
+  to: string;
+  signalType: WebRtcSignalType;
+  sdp?: string;
+  candidate?: string;
+  mid?: string;
+  mLineIndex?: number;
+}
+
 export type ClientToServerMessage =
   | { type: "register"; payload: RegisterPayload }
   | { type: "view_request"; payload: ViewRequestPayload }
   | { type: "view_decision"; payload: ViewDecisionPayload }
   | { type: "chat"; payload: OneLineChatPayload }
+  | { type: "webrtc_signal"; payload: WebRtcSignalPayload }
   | { type: "disconnect"; payload?: { reason?: string } }
   | { type: "ping" };
 
@@ -43,6 +55,17 @@ export type ServerToClientMessage =
   | { type: "view_request"; payload: { viewerId: string } }
   | { type: "view_decision"; payload: { agentId: string; allow: boolean; reason?: string } }
   | { type: "chat"; payload: { from: string; text: string } }
+  | {
+      type: "webrtc_signal";
+      payload: {
+        from: string;
+        signalType: WebRtcSignalType;
+        sdp?: string;
+        candidate?: string;
+        mid?: string;
+        mLineIndex?: number;
+      };
+    }
   | { type: "error"; payload: { code: string; message: string } }
   | { type: "pong" };
 

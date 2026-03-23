@@ -9,6 +9,13 @@ Current focus is Phase A foundation:
 - Viewer B CLI process
 - One-line chat channel
 
+Phase B signaling upgrades are now included:
+
+- WebRTC signaling relay (offer, answer, ice, renegotiate)
+- Heartbeat and stale-connection timeout handling on signaling server
+- Automatic reconnect in Agent and Viewer clients with exponential backoff
+- Session audit logging on signaling server
+
 ## Status
 
 Early development prototype. Not production ready.
@@ -51,6 +58,7 @@ npx tsx apps/viewer-cli/src/index.ts --user-id B --session-code DEMO-123 --targe
 
 ```text
 /chat hello-from-viewer
+/signal offer v=0\no=- 0 0 IN IP4 127.0.0.1
 /disconnect
 ```
 
@@ -59,6 +67,7 @@ npx tsx apps/viewer-cli/src/index.ts --user-id B --session-code DEMO-123 --targe
 ```bash
 npm run lint
 npm run typecheck
+npm run test
 npm run build
 npm run format:check
 ```
@@ -83,6 +92,6 @@ MIT. See `LICENSE`.
 
 ## Notes
 
-- This baseline does not stream video yet.
-- Next phase will attach WebRTC SDP/ICE forwarding and media tracks.
+- This baseline includes WebRTC signaling only, not media capture/encoding yet.
+- Next phase is native screen capture and tray-based UI behavior for Agent A.
 - Current UX behavior is no modal popup during disconnect. Status changes are one-line log entries.

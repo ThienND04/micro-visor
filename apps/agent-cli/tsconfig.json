@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@micro-visor/protocol": ["../../packages/protocol/src/index.ts"]
+    },
+    "outDir": "dist"
+  },
+  "include": ["src/**/*"]
+}

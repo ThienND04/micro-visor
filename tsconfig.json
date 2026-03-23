@@ -3,7 +3,7 @@
   "references": [
     { "path": "packages/protocol" },
     { "path": "services/signaling" },
-    { "path": "apps/agent-cli" },
+    { "path": "apps/agent-runtime" },
     { "path": "apps/viewer-cli" }
   ]
 }

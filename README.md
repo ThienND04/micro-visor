@@ -5,7 +5,7 @@ Minimal bootstrap for a low-distraction remote screen sharing app.
 Current focus is Phase A foundation:
 
 - Signaling service and session workflow skeleton
-- Agent A CLI process
+- Agent A runtime process
 - Viewer B CLI process
 - One-line chat channel
 
@@ -24,7 +24,7 @@ Early development prototype. Not production ready.
 
 - `packages/protocol`: shared message protocol types and parsers
 - `services/signaling`: WebSocket signaling server
-- `apps/agent-cli`: Agent-side client process
+- `apps/agent-runtime`: Agent runtime shell with adapter-based UI architecture
 - `apps/viewer-cli`: Viewer-side client process
 - `docs`: implementation notes and status
 
@@ -42,11 +42,14 @@ npm install
 npx tsx services/signaling/src/index.ts
 ```
 
-3. Start Agent A:
+3. Start Agent A with Agent Runtime shell (canonical path):
 
 ```bash
-npx tsx apps/agent-cli/src/index.ts --user-id A --session-code DEMO-123 --auto-allow true
+npx tsx apps/agent-runtime/src/index.ts --user-id A --session-code DEMO-123
 ```
+
+Important: only run one Agent process per userId. The signaling server keeps one active
+connection per userId and will replace the old connection.
 
 4. Start Viewer B:
 
@@ -60,6 +63,17 @@ npx tsx apps/viewer-cli/src/index.ts --user-id B --session-code DEMO-123 --targe
 /chat hello-from-viewer
 /signal offer v=0\no=- 0 0 IN IP4 127.0.0.1
 /disconnect
+```
+
+Agent Runtime shell commands:
+
+```text
+/approve
+/deny
+/chat hello
+/signal offer <sdp>
+/disconnect
+/status
 ```
 
 ## Quality checks
@@ -93,5 +107,5 @@ MIT. See `LICENSE`.
 ## Notes
 
 - This baseline includes WebRTC signaling only, not media capture/encoding yet.
-- Next phase is native screen capture and tray-based UI behavior for Agent A.
+- Agent runtime currently uses a console UI adapter; native tray/overlay adapter is the next step.
 - Current UX behavior is no modal popup during disconnect. Status changes are one-line log entries.
